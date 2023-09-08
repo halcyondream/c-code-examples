@@ -1,4 +1,5 @@
 #include "hospital.h"
+#include "errors.h"
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -51,9 +52,4 @@ void printHospitalStats(const hospital_t *hospital) {
     patient++;
   }
   printf("\n");
-}
-
-void exitWithError(char *message) {
-  printf("ERROR: %s\nExiting.\n", message);
-  exit(-1);
 }

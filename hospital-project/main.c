@@ -1,4 +1,5 @@
 #include "main.h"
+#include "errors.h"
 #include <stdlib.h>
 
 // Run the simulation.
