@@ -1,3 +1,7 @@
+# Data Structures in C
+
+Implementation of examples from *C Pointers*, chapter 6.
+
 Differences from Chapter 6 code:
 
 - Use of NULL after free statements
@@ -12,4 +16,4 @@ Errata:
 Other notes:
 
 - Use of header files and a makefile
-- Placement of asterisk on the data type (more Go-like)
+- Behavior of the stack
