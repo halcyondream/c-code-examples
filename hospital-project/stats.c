@@ -9,3 +9,24 @@ void clearStatistics(stats_t *stats) {
   stats->totalPurples = 0;
   stats->totalRecovered = 0;
 }
+
+// Increment statistics based on a given stage (ie from a patient).
+void updateStatsFromStage(stats_t *stats, const stage_t stage) {
+  switch (stage) {
+  case STAGE_GREEN:
+    stats->totalGreens++;
+    break;
+  case STAGE_YELLOW:
+    stats->totalYellows++;
+    break;
+  case STAGE_RED:
+    stats->totalReds++;
+    break;
+  case STAGE_PURPLE:
+    stats->totalPurples++;
+    break;
+  case STAGE_RECOVERED:
+    stats->totalRecovered++;
+    break;
+  }
+}

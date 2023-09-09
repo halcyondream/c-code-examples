@@ -18,10 +18,7 @@ void initializeHospital(hospital_t *hospital, uint8_t totalRooms) {
   }
   patient_t *patient = hospital->patients;
   while (patient != hospital->patients + hospital->totalRooms) {
-    patient->stage = getRandomStage();
-    patient->daysLeft = 3;
-    patient->gender = getRandomGender();
-    patient->gettingWorse = true;
+    initializePatient(patient);
     patient++;
   }
   clearStatistics(hospital->stats);

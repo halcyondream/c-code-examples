@@ -17,7 +17,9 @@ typedef struct patient_s {
   bool gettingWorse;
 } patient_t;
 
-void updatePatientState(patient_t *patient);
-gender_t getRandomGender();
+void initializePatient(patient_t *patient);
+void tryImprovePatient(patient_t *patient);
+void tryWorsenPatient(patient_t *patient);
+void updatePatientTimer(patient_t *patient);
 
 #endif

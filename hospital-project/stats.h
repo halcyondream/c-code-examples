@@ -1,5 +1,7 @@
 #ifndef STATS
 #define STATS
+#include "patient.h"
+#include "stage.h"
 #include <stdint.h>
 
 typedef struct stats_s {
@@ -11,5 +13,6 @@ typedef struct stats_s {
 } stats_t;
 
 void clearStatistics(stats_t *stats);
+void updateStatsFromStage(stats_t *stats, stage_t stage);
 
 #endif

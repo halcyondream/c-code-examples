@@ -1,2 +1,2 @@
-make: main.c hospital.c patient.c stage.c stats.c errors.c
-	gcc -o main main.c hospital.c patient.c stage.c stats.c errors.c -I.
+make: application.c hospital.c patient.c stage.c stats.c errors.c visitor.c virus.c
+	gcc -o application application.c hospital.c patient.c stage.c stats.c errors.c visitor.c virus.c -I. -fshort-enums

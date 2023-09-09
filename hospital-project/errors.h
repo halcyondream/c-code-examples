@@ -3,4 +3,4 @@
 
 void exitWithError(char *message);
 
-#endif 
+#endif

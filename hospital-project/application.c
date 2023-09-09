@@ -1,5 +1,6 @@
-#include "main.h"
+#include "application.h"
 #include "errors.h"
+#include "visitor.h"
 #include <stdlib.h>
 
 // Run the simulation.
@@ -24,29 +25,8 @@ int main() {
 void dailyHospitalUpdates(hospital_t *hospital) {
   patient_t *patient = hospital->patients;
   while (patient != hospital->patients + hospital->totalRooms) {
-    updatePatientState(patient);
+    visitPatient(patient);
     updateStatsFromStage(hospital->stats, patient->stage);
     patient++;
-  }
-}
-
-// Increment statistics based on a given stage (ie from a patient).
-void updateStatsFromStage(stats_t *stats, stage_t stage) {
-  switch (stage) {
-  case STAGE_GREEN:
-    stats->totalGreens++;
-    break;
-  case STAGE_YELLOW:
-    stats->totalYellows++;
-    break;
-  case STAGE_RED:
-    stats->totalReds++;
-    break;
-  case STAGE_PURPLE:
-    stats->totalPurples++;
-    break;
-  case STAGE_RECOVERED:
-    stats->totalRecovered++;
-    break;
   }
 }
