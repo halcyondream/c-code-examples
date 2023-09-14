@@ -2,7 +2,8 @@
 // Reworking of this C++ solution:
 //  https://docs.google.com/file/d/0BwtP9e5j1RbpSjhvSG4wbkhGcmM/edit?resourcekey=0-4JkyQslzn9gco3-VCPeW-A
 //
-// Note that this is a stack-based solution. A sufficiently large MAX 
+// Due to stack limitations, a sufficiently large value for MAX will
+// cause the application to segfault pretty early.
 //
 #include <stdint.h>
 #include <stdio.h>
