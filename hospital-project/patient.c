@@ -1,4 +1,5 @@
 #include "patient.h"
+#include "errors.h"
 #include <stdlib.h>
 
 // Helper function for patients.
@@ -18,6 +19,9 @@ void initializePatient(patient_t *patient) {
 }
 
 void updatePatientTimer(patient_t *patient) {
+  if (patient->daysLeft > 3) {
+    exit(error_code_INVALID_DAYS_LEFT);
+  }
   if (patient->daysLeft) {
     (patient->daysLeft)--;
   }

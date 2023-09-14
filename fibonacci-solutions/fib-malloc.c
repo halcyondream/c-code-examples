@@ -1,35 +1,57 @@
-//
-// Reworking of this C++ solution:
-//  https://docs.google.com/file/d/0BwtP9e5j1RbpSjhvSG4wbkhGcmM/edit?resourcekey=0-4JkyQslzn9gco3-VCPeW-A
-//
-// Note that this is a stack-based solution. A sufficiently large MAX 
-//
+// https://docs.google.com/file/d/0BwtP9e5j1RbpSjhvSG4wbkhGcmM/edit?resourcekey=0-4JkyQslzn9gco3-VCPeW-A
+
 #include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
+
 #define DEBUG
-#define MAX 100000
+
+//
+// Try MAX:     20000000000000          malloc fails after this.
+// UINT64_MAX:  18446724073709551615    Much larger than MAX. Fails malloc.
+//
+const long long unsigned int MAX = 1000000;
 
 int main() {
+  
+  if (sizeof(uint8_t) * MAX < MAX) {
+    printf("Error setting the composite number. Possible overflow.\n");
+    exit(1);
+  }
+  
+  printf("Allocating memory...\n");
 
-  unsigned char A[MAX] = {};
-  unsigned char B[MAX] = {};
-  // Fibonacci(n): The nth number of the fibonacci sequence.
-  unsigned char F_n[MAX] = {};
+  uint8_t *A = (uint8_t *)calloc(MAX, sizeof(uint8_t));
+  uint8_t *B = (uint8_t *)calloc(MAX, sizeof(uint8_t));
+  uint8_t *F_n = (uint8_t *)calloc(MAX, sizeof(uint8_t));
+  
+  if (!A || !B || !F_n) {
+    printf("Error allocating memory.\n");
+    exit(1);
+  }
+  
+  printf("Done allocating memory.\n");
+  printf("MX:  %llu\nBS:  %llu\n", MAX, sizeof(uint8_t)*MAX);
+  printf("A:   %llu\nB:   %llu\nF_n: %llu\n", 
+    MAX/sizeof(A[0]),
+    MAX/sizeof(B[0]),
+    MAX/sizeof(F_n[0])
+  );
 
-  int i;
+  long long unsigned int i;
 
-  int ct1;
-  int ct2;
-  int ct3;
-  int ct;
+  long long unsigned int ct1;
+  long long unsigned int ct2;
+  long long unsigned int ct3;
+  long long unsigned int ct;
 
   int t1;
 
   int x;
   int y;
 
-  int counter = 0;
-  int maxcounter = MAX;
+  size_t counter = 0;
+  size_t maxcounter = MAX;
 
   A[MAX - 1] = '1';
   B[MAX - 1] = '1';
@@ -37,6 +59,8 @@ int main() {
   ct1 = MAX - 2;
   ct2 = MAX - 2;
   ct3 = MAX - 1;
+
+  printf("Starting...\n");
 
   while (counter < maxcounter - 2) {
 
@@ -99,24 +123,27 @@ int main() {
       i--;
     }
 
-    if (F_n[0] != 0) { // All digits in len( f(n) ) are occupied.
+    // All digits in len( f(n) ) are occupied.
+    if (F_n[0] != 0) { 
       break;
     }
 
-    for (i = ct2 + 1; i < MAX; i++) { // Copy B -> A
+    // Copy B -> A
+    for (i = ct2 + 1; i < MAX; i++) {
       A[i] = B[i];
     }
 
+    // Copy F(n) -> B
     for (i = ct3 + 1; i < MAX; i++) {
       B[i] = F_n[i];
-    } // Copy F(n) -> B
+    }
     counter++;
   }
 
 #ifdef DEBUG
 
   // Print F(n).
-  printf("Fibonacci number %d: ", counter + 2);
+  printf("Fibonacci number %lu: ", counter + 2);
   for (i = ct3 + 1; i < MAX; i++) {
     printf("%c", F_n[i]); // Remember the +'0' -> char integer!
     if (i > ct3 + 15) {
@@ -126,9 +153,9 @@ int main() {
   printf("...%c\n\n", F_n[MAX - 1]);
 
   // Display utilization statistics.
-  int a = 0;
-  int b = 0;
-  int c = 0;
+  long long unsigned int a = 0;
+  long long unsigned int b = 0;
+  long long unsigned int c = 0;
   while (A[a++] == 0)
     ;
   while (B[b++] == 0)
@@ -136,9 +163,8 @@ int main() {
   while (F_n[c++] == 0)
     ;
   printf("Utilized|Free space:\n");
-  printf("A: %d|%d\nB: %d|%d\nC: %d|%d\n", 
-    MAX - a, a, MAX - b, b, MAX - c, b
-  );
+  printf("A: %llu|%llu\nB: %llu|%llu\nC: %llu|%llu\n", MAX - a, a, MAX - b, b,
+         MAX - c, b);
   printf("\n");
 
 #endif
