@@ -1,5 +1,8 @@
+//
+// Reworking of this solution. Uses dynamically-allocated memory to hold the numbers:
+//
 // https://docs.google.com/file/d/0BwtP9e5j1RbpSjhvSG4wbkhGcmM/edit?resourcekey=0-4JkyQslzn9gco3-VCPeW-A
-
+//
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
